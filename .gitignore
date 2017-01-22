@@ -1,0 +1,4 @@
+config.json
+Dockerfile.dev
+*.idea
+*.rubocop.yml
