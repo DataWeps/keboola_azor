@@ -2,6 +2,8 @@ require 'json'
 require 'typhoeus'
 
 API_URL = 'https://azor.weps.cz/api/files/#FILE_ID/download'.freeze
+MANIFEST = { incremental: true, primary_key: %w(internal_code updated_at) }.freeze
+
 
 def download_file
   file = File.open(filename, 'wb')
@@ -44,9 +46,16 @@ def filename
   "#{ENV['KBC_DATADIR']}out/tables/out.c-azor_#{CONFIG['file']}.csv"
 end
 
+def create_manifest
+  Dir["#{ENV['KBC_DATADIR']}out/tables/*.csv"].each do |table|
+    File.open("#{table}.manifest", 'w') { |file| file << MANIFEST.to_json }
+  end
+end
+
 begin
   CONFIG = JSON.parse(File.read("#{ENV['KBC_DATADIR']}config.json"))['parameters']
 rescue StandardError
   Kernel.abort('No configuration file, or it is missing API parameters.')
 end
 fetch_files
+create_manifest
