@@ -2,7 +2,10 @@ require 'json'
 require 'typhoeus'
 
 API_URL = 'https://azor.weps.cz/api/files/#FILE_ID/download'.freeze
-MANIFEST = { incremental: true, primary_key: %w(internal_code updated_at) }.freeze
+MANIFEST = {
+  incremental: true,
+  primary_key: %w(internal_code shop saved_at)
+}.freeze
 
 
 def download_file
