@@ -46,7 +46,7 @@ def fetch_files
 end
 
 def filename
-  "#{ENV['KBC_DATADIR']}out/tables/out.c-azor_#{CONFIG['file']}.csv"
+  "#{ENV['KBC_DATADIR']}out/tables/out.c-azor.#{CONFIG['file']}.csv"
 end
 
 def create_manifest
