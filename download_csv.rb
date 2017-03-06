@@ -11,9 +11,10 @@ MANIFEST = {
 def download_file
   file = File.open(filename, 'wb')
   url = API_URL.sub('#FILE_ID', CONFIG['file'])
+  password = CONFIG['#password'] ? CONFIG['#password'] : CONFIG['password']
   request = Typhoeus::Request.new(
     url,
-    userpwd: "#{CONFIG['username']}:#{CONFIG['password']}"
+    userpwd: "#{CONFIG['username']}:#{password}"
   )
   request.on_headers do |response|
     raise 'Request failed' if response.code != 200
