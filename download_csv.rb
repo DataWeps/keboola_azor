@@ -77,6 +77,7 @@ def password
 end
 
 begin
+  pp ENV
   CONFIG = JSON.parse(File.read("#{ENV['KBC_DATADIR']}config.json"))['parameters']
 rescue StandardError
   Kernel.abort('No configuration file, or it is missing API parameters.')

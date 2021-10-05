@@ -1,10 +1,5 @@
-FROM ruby
-MAINTAINER Jan Mosat <mosat@weps.cz>
+FROM quay.io/keboola/docker-custom-python:latest
 
-RUN gem install typhoeus
-
-WORKDIR . /home/
-
-COPY . /home/
-
-ENTRYPOINT ruby /home/download_csv.rb
+COPY . /code/
+WORKDIR /data/
+CMD ["python", "-u", "/code/main.py"]
